@@ -1,0 +1,75 @@
+package cvit.com.manager;
+import java.sql.ResultSet;
+import cvit.com.pub.DBConn;
+import java.sql.*;
+
+import cvit.com.model.*;
+
+import java.util.Vector;
+
+public class StudentManager {
+    
+    public int addStudent(Student s) {
+        Connection conn=null;                        
+        Statement stmt=null;                         
+        ResultSet rs=null;                    
+        DBConn db = new DBConn();
+        conn = db.getConn();
+        int i = 0;
+        String sql = "insert into student values('" + s.getSno() + "', '" +
+                s.getSname() + "', '" + s.getSsex() + "', '" + s.getSethnix() +
+                "', '" + s.getShome() + "', '" + s.getSyear() + "', '" +
+                s.getSmajor() + "', '" + s.getScollege() + "', '" +
+                s.getSbirth() + "')";
+        try {
+            stmt = conn.createStatement();
+            i = stmt.executeUpdate(sql);
+            stmt.close();
+            conn.close();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return i;
+    }
+
+    public int deleteUser(String sno) {
+        Connection conn=null;                        
+        Statement stmt=null;                        
+        ResultSet rs=null;                        
+        DBConn db = new DBConn();
+        conn = db.getConn();
+        int i = 0;
+        String sql = "delete from student where sno='" + sno + "'";
+        try {
+            stmt = conn.createStatement();
+            i = stmt.executeUpdate(sql);
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+  
+    public int update_Student(String sno, String sname, String ssex,
+                              String sethnix, String shome, String syear,
+                              String smajor, String scollege, String sbirth) {
+        Connection conn=null;                     
+        Statement stmt=null;                         
+        ResultSet rs=null;
+        DBConn db = new DBConn();
+        conn = db.getConn();
+        int i = 0;
+        String sql = "update student set sname='" + sname +"', ssex='" + ssex + "', sethnix='" + sethnix +"', shome='" + shome + "', syear='" + syear +"', smajor='" + smajor + "', scollege='" + scollege +"', sbirth='" + sbirth + "' where sno='" + sno + "'";
+        try {
+            stmt = conn.createStatement();
+            i = stmt.executeUpdate(sql);
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+    
+   
